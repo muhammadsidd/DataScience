@@ -27,14 +27,14 @@ def mid1(string):
 k = mid1("acb")
 print(k)
 
-def online_count(dick):
-    count = 0
-    for k,v in dick.items():
-        if v == "online":
-            count +=1
-    return count
-statuses = {
-    "Alice": "online",
-    "Bob": "offline",
-    "Eve": "online",
-}
+# def online_count(dick):
+#     count = 0
+#     for k,v in dick.items():
+#         if v == "online":
+#             count +=1
+#     return count
+# statuses = {
+#     "Alice": "online",
+#     "Bob": "offline",
+#     "Eve": "online",
+# }
