@@ -18,6 +18,7 @@ def mid(str):
     else:
         k = math.ceil(len(str) / 2)
         return str[k - 1]
+
 def mid1(string):
     if len(string) % 2 == 0:
         return ""
@@ -25,3 +26,15 @@ def mid1(string):
 
 k = mid1("acb")
 print(k)
+
+def online_count(dick):
+    count = 0
+    for k,v in dick.items():
+        if v == "online":
+            count +=1
+    return count
+statuses = {
+    "Alice": "online",
+    "Bob": "offline",
+    "Eve": "online",
+}
