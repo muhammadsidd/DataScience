@@ -12,16 +12,16 @@ def capital_indexes(cap):
     print(l1)
     return l1
 
-# def mid(str):
-#     if (len(str) % 2 == 0):
-#         return ""
-#     else:
-#         k = math.ceil(len(str) / 2)
-#         return str[k - 1]
-# def mid1(string):
-#     if len(string) % 2 == 0:
-#         return ""
-#     return string[len(string)//2]
-#
-# k = mid1("acb")
-# print(k)
+def mid(str):
+    if (len(str) % 2 == 0):
+        return ""
+    else:
+        k = math.ceil(len(str) / 2)
+        return str[k - 1]
+def mid1(string):
+    if len(string) % 2 == 0:
+        return ""
+    return string[len(string)//2]
+
+k = mid1("acb")
+print(k)
