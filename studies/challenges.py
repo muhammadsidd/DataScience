@@ -24,5 +24,5 @@ def capital_indexes(cap):
     return string[len(string)//2]
 
 
-k = mid1("acb")
+k = mid1("acb"
 print(k)
