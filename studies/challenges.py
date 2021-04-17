@@ -24,5 +24,5 @@ def mid1(string):
     return string[len(string)//2]
 
 
-k = mid1("aaaa")
+k = mid1("aaa")
 print(k)
