@@ -36,3 +36,15 @@ print(df)
 
 concate = pd.concat([df,record1]) #going to default to num index if same index for first dataset and second dataset
 print(concate)
+
+###DATA MUNGING#######
+
+country = pd.read_csv('C:\\Users\\Talha\\Downloads\\data_csv.csv')
+c5 = country.head(5)
+print(c5)
+print(c5[c5["Real Price"] > 90]) 
+
+c5.to_html('great_snp.html')
+
+
+
