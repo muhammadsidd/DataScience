@@ -2,9 +2,10 @@ import tweepy as tw
 import nltk 
 from nltk.corpus import stopwords
 from textblob import Word, TextBlob
-import matplotlib as plt
+from matplotlib import pyplot as plt
 import pandas as pd
 import numpy as np
+from IPython.display import display
 
 nltk.download('stopwords')
 nltk.download('wordnet')
@@ -20,10 +21,10 @@ access_token_secret = "8rEjjTmqFxVFD4fCOdVwaNZTkAaFZUwYkEWhYZo7WnzFt"
 ##############################################################
 
 ################### AUTHENTICATION ##########################
+
 auth = tw.OAuthHandler(consumer_key,consumer_secret)
 auth.set_access_token(access_token,access_token_secret)
 api = tw.API(auth,wait_on_rate_limit=True)
-############################################################
 
 ######################### QUERY ############################
 
@@ -54,7 +55,7 @@ print("\n")
 print(len(df[df['Buy']== 1])," Buy references")
 print(len(df[df['Sell']== 1]), "Sell references")
 
-######################### PREPOCESS ########################
+######################### PREPROCESS ########################
 
 def preprocess_tweets(tweet, custom_stopwords):
     preprocess_tweet = tweet
@@ -66,5 +67,15 @@ def preprocess_tweets(tweet, custom_stopwords):
     return preprocess_tweet
 
 df['Processed Tweet'] = df['Tweets'].apply(lambda x: preprocess_tweets(x.lower(), custom_stopwords))
+
+
+
+####################### SENTIMENTAL ANALYSIS ###################
+
+df['polarity'] = df['Processed Tweet'].apply(lambda x: TextBlob(x).sentiment[0])
+df['subjectivity'] = df['Processed Tweet'].apply(lambda x: TextBlob(x).sentiment[1])
+
+display(df[df['Buy']==1][['Buy','polarity','subjectivity']].groupby('Buy').agg([np.mean, np.max, np.min, np.median]))
+df[df['Sell']==1][['Sell','polarity','subjectivity']].groupby('Sell').agg([np.mean, np.max, np.min, np.median])
 
 print(df.head())
