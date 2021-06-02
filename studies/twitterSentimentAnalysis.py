@@ -75,7 +75,37 @@ df['Processed Tweet'] = df['Tweets'].apply(lambda x: preprocess_tweets(x.lower()
 df['polarity'] = df['Processed Tweet'].apply(lambda x: TextBlob(x).sentiment[0])
 df['subjectivity'] = df['Processed Tweet'].apply(lambda x: TextBlob(x).sentiment[1])
 
+##BUYING SENTIMENT
+##filtering out the data where buying is set to 1 and only returning buy, polarity and subjectivity coloumns and grouping it by buy coloumns 
+## while applying aggrate function to it. 
 display(df[df['Buy']==1][['Buy','polarity','subjectivity']].groupby('Buy').agg([np.mean, np.max, np.min, np.median]))
-df[df['Sell']==1][['Sell','polarity','subjectivity']].groupby('Sell').agg([np.mean, np.max, np.min, np.median])
+
+##SELLING SENTIMENT
+##filtering out the data where selling is set to 1 and only returning sell, polarity and subjectivity coloumns and grouping it by sell coloumns 
+## while applying aggrate function to it. 
+display(df[df['Sell']==1][['Sell','polarity','subjectivity']].groupby('Sell').agg([np.mean, np.max, np.min, np.median]))
 
 print(df.head())
+
+########################## DATA VISUALIZATION ##################
+
+buy = df[df['Sell']==1][['Timestamp','polarity']]
+buy = buy.sort_values(by='Timestamp',ascending=True)
+buy['MA Polarity'] = buy.polarity.rolling(10, min_periods=3).mean()
+
+sell = df[df['Sell']==1][['Timestamp','polarity']]
+sell = sell.sort_values(by='Timestamp',ascending=True)
+sell['MA Polarity'] = sell.polarity.rolling(10, min_periods=3).mean()
+
+sellers = 'red'
+buyers = 'blue'
+fig, axes = plt.subplots(2, 1, figsize=(13, 10))
+
+axes[0].plot(sell['Timestamp'], sell['MA Polarity'],color = sellers)
+axes[0].set_title("\n".join(["Selling Polarity"]))
+axes[1].plot(buy['Timestamp'], buy['MA Polarity'], color=buyers)
+axes[1].set_title("\n".join(["Buying Polarity"]))
+
+fig.suptitle("\n".join(["AMC Rally Analysis"]), y=0.98)
+
+plt.show()
