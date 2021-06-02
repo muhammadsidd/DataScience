@@ -46,3 +46,14 @@ print(l4)
 print(l4.min())
 print(l4.max())
 print(l4.mean(axis=1)) ##mean in each row
+
+
+l5 = np.random.rand(10,4)
+print(l5)
+
+ex = l5[0:5,:]
+print(ex)
+
+l6 = np.random.randint(0,100,5)
+print(np.all(l6))
+##will return true if the array doesnt contain a 0 or none
