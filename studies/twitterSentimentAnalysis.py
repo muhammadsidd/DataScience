@@ -13,11 +13,11 @@ stop_words = stopwords.words('english')
 custom_stopwords = ['rt' , '$amc']
 
 ################# TWITTER API CREDENTIALS ####################
-consumer_key = "ENRr83l2o7OS8y4DJdoFWhrpj"
-consumer_secret = "oeGcJlnmMSitq2qX2UoyJpcXQZMwu2DyHLpNGJSH6KGIRsUZAz"
-bearer_Token = "AAAAAAAAAAAAAAAAAAAAAHZYKwEAAAAAzbhJPlPgVUU1kuCvuYP9hTg2%2BTs%3DIVX5YuFJvJJBFhH467eagnUMcnoQTrE1kYO9szbaqu1IFWcZX0"
-access_token = "1340798338497703937-2X0cwWG6tua9OyJdZTMNRLRnoP19gr"
-access_token_secret = "8rEjjTmqFxVFD4fCOdVwaNZTkAaFZUwYkEWhYZo7WnzFt"
+consumer_key = "4DVrXQvvC9yYq2NLhcq3Shtok"
+consumer_secret = "z6RClz2iPvkeBUwD40lYunQ58JdNaqfSktvHrRiUpxzHBW54BS"
+bearer_Token = "AAAAAAAAAAAAAAAAAAAAAHZYKwEAAAAAIozYdhFG%2BS6XEkJResnAVOvIOy4%3DTxvqihYnIxGK2Wg7UYYB4G2EIup6NE2o9WtQ2keO1uudndQSeF"
+access_token = "1340798338497703937-R9Z0ShNFrP3SRL6uRoFaHCFGPpOwiP"
+access_token_secret = "Msf1DPRa2j3x08IA5ovBUxCWTeXuhejpuhvUvvrDxcNHs"
 ##############################################################
 
 ################### AUTHENTICATION ##########################
@@ -89,7 +89,7 @@ print(df.head())
 
 ########################## DATA VISUALIZATION ##################
 
-buy = df[df['Sell']==1][['Timestamp','polarity']]
+buy = df[df['Buy']==1][['Timestamp','polarity']]
 buy = buy.sort_values(by='Timestamp',ascending=True)
 buy['MA Polarity'] = buy.polarity.rolling(10, min_periods=3).mean()
 
