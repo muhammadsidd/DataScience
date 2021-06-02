@@ -18,3 +18,10 @@ auth.set_access_token(access_token,access_token_secret)
 api = tw.API(auth,wait_on_rate_limit=True)
 ############################################################
 
+######################### QUERY ############################
+
+hashtag = '#presidentialdebate'
+query = tw.Cursor(api.search, q=hashtag).items(1000)
+#tweet.from_user
+tweets = [{'Tweets':tweet.text, 'Timestamp':tweet.created_at} for tweet in query]
+print(tweets)
