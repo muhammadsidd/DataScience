@@ -109,5 +109,5 @@ axes[1].set_title("\n".join(["Buying Polarity"]))
 fig.suptitle("\n".join(["AMC Rally Analysis"]), y=0.98)
 
 plt.show()
-
+print("done")
 df.to_csv("amc.csv")
