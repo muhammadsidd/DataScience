@@ -20,7 +20,7 @@ for response in data['LanguagesWorkedWith']:
 languages = []
 popularity = []
 
-for item in language_counter.most_common(20000):
+for item in language_counter.most_common(10):
     languages.append(item[0])
     popularity.append(item[1])
 
@@ -31,19 +31,28 @@ print(list(zip(languages,popularity)))
 # plt.plot(ages_x,py_dev_y,marker = 'o', linewidth = 3, label = "Python Devs") #arguments are x axis, yaxis, format (eg color followed by type of line), legend label
 
 #####################BAR GRAPH ##############################
-plt.bar(x_indexes-width,dev_y, width = width, color ='#e5ae38', label="All Devs")
-plt.bar(x_indexes,py_dev_y, width = width, color ='#008fd5', label="All Devs")
+# plt.bar(x_indexes-width,dev_y, width = width, color ='#e5ae38', label="All Devs")
+# plt.bar(x_indexes,py_dev_y, width = width, color ='#008fd5', label="All Devs")
 
-plt.xticks(ticks=x_indexes, labels= ages_x) ## To replace indexes (x_indexes) with ages_x list
+# plt.xticks(ticks=x_indexes, labels= ages_x) ## To replace indexes (x_indexes) with ages_x list
 
 ######################## PLOTING CODE (COMMON FOR ALL PLOTS)########################
-plt.title('Median Salary in U$D by AGE')
-plt.xlabel('Age')
-plt.ylabel('Salary')
-plt.legend() #Passing values in a list on first plot first legend label bases
-##plt.grid(True)
-plt.tight_layout()
+# plt.title('Median Salary in U$D by AGE')
+# plt.xlabel('Age')
+# plt.ylabel('Salary')
+# plt.legend() #Passing values in a list on first plot first legend label bases
+# ##plt.grid(True)
+# plt.tight_layout()
 
-plt.savefig('plot.png')
+# plt.savefig('plot.png')
+# plt.show()
+
+########################## Languages and popularity ##############
+
+plt.barh(languages,popularity)
+plt.title("popular languages")
+plt.ylabel("programming languages")
+plt.xlabel(" number of programers")
+plt.tight_layout()
 plt.show()
 
