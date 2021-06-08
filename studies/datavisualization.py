@@ -88,3 +88,36 @@ plt.pie(popularity, labels=languages, explode=exp, shadow=True,
 plt.tight_layout()
 plt.show()
 plt.savefig('Pie.png')
+
+############################################# Stack Plots ##################################
+minutes = ['1','2','3','4','5','6','7','8','9','10']
+player1 = [8, 6, 5, 4, 3, 2, 1, 1, 1,0]
+player2 = [0, 1, 2, 3, 3, 3, 3, 4, 3,2]
+player3 = [0, 1, 1, 1, 2, 3, 4, 3, 4,6]
+
+labels = ['player1', 'player2', 'player3']
+colors = ['#6d904f', '#fc4f30', '#008fd5']
+
+plt.stackplot(minutes, player1, player2, player3, labels=labels, colors=colors)
+
+plt.legend(loc=(0.07, 0.05)) ##tuple is a cordinate (x,y)
+
+plt.title("My Awesome Stack Plot")
+plt.tight_layout()
+plt.show()
+plt.savefig("stackplt.png")
+
+################################# sin cosine #########################################
+x_f =np.array([0,45,90,135,180,225,270,315,360])
+f_s=[]
+
+for x in x_f:
+    f = np.sin(x)
+    f_s.append(f)
+
+plt.plot(x_f,f_s)
+plt.xlabel("Angle in Degrees")
+plt.xticks(f_s)
+plt.ylabel("f(Sin(x))")
+plt.tight_layout()
+plt.show()
