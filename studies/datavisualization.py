@@ -1,3 +1,4 @@
+from re import T
 from matplotlib import pyplot as plt
 import numpy as np
 import pandas as pd
@@ -6,10 +7,10 @@ from collections import Counter
 plt.style.use('fivethirtyeight')
 
 ages_x = [25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35]
-dev_y = [38200, 45600, 59033, 61344, 66124,
-         71856, 89167, 91178, 91699, 93200, 94000]
+dev_y = [38200, 45600, 55033, 67344, 69124,
+         71856, 72167, 73178, 73699, 79200, 84000]
 py_dev_y = [45372, 48876, 53850, 63106, 65889,
-            70003, 70000, 71496, 75370, 83650, 90000]
+            70003, 70000, 71496, 75370, 73650, 90000]
 
 x_indexes = np.arange(len(ages_x))
 width = 0.25
@@ -29,13 +30,21 @@ for item in language_counter.most_common(6):
 
 print(list(zip(languages, popularity)))
 
+dframe = pd.DataFrame({"Age":ages_x,"Python_Dev": py_dev_y, "All_Devs" : dev_y})
+dframe.set_index("Age", inplace=True)
+# dframe["Difference"] = dframe["Python_Dev"].apply(lambda x: x - dframe["All_Devs"])
+dframe["Difference"] = dframe["Python_Dev"] - dframe["All_Devs"]
 
+print(dframe)
 # ******************LINE GRAPH ***************************************
 plt.plot(ages_x,dev_y, color ='k', linestyle = '--', marker='+', label = "All Devs")
 plt.plot(ages_x,py_dev_y,marker = 'o', linewidth = 3, label = "Python Devs") #arguments are x axis, yaxis, format (eg color followed by type of line), legend label
 plt.title('Median Salary in U$D by AGE')
 plt.xlabel('Age')
 plt.ylabel('Salary')
+# med = np.median(py_dev_y)
+plt.fill_between(ages_x, py_dev_y, dev_y, where=py_dev_y <= dev_y, interpolate= True, color='red', alpha =0.25)
+plt.fill_between(ages_x, py_dev_y, dev_y, where=py_dev_y >= dev_y, interpolate= True,color = 'k', alpha =0.25)
 plt.legend() #Passing values in a list on first plot first legend label bases
 plt.grid(True)
 plt.tight_layout()
@@ -117,7 +126,17 @@ for x in x_f:
 
 plt.plot(x_f,f_s)
 plt.xlabel("Angle in Degrees")
-plt.xticks(f_s)
+# plt.xticks(f_s)
 plt.ylabel("f(Sin(x))")
 plt.tight_layout()
+plt.show()
+
+################################ Histograms ###########################################
+
+ages = [18,19,20,18,20,18,19,23,22,23,23,23,25,26,27,28,28,29,30,31,32,35,35,45,55]
+bins = [10,20,30,40,50,60]
+med = np.median(ages)
+plt.hist(ages, bins=bins, edgecolor = 'black' ) #can add log = True in parameters to display y vlaues as power of 10
+plt.axvline(med, label = "median line", color = 'red', linewidth = 2)
+plt.legend()
 plt.show()
