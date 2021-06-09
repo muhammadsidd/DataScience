@@ -17,6 +17,11 @@ width = 0.25
 language_counter = Counter()
 data = pd.read_csv('data.csv')  # reads into a dataFrame
 
+############# CLEANING DATA #########################
+#data = data.dropna(axis='index', how='any')
+    #any = drop the record index(row) if any value is missing
+    #all = delete the record if and only if all values are missing 
+    #axis = 'index' for rows 'coloumns' for columns
 for response in data['LanguagesWorkedWith']:
     # returns a tuple with (language, frequency of occurance)
     language_counter.update(response.split(';'))

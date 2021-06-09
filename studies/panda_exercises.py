@@ -1,4 +1,4 @@
-from numpy import index_exp
+import numpy as np
 import pandas as pd
 import matplotlib as plt
 from matplotlib import style
@@ -26,7 +26,7 @@ joined = df.join(record1) #join the two using the same index.
 print(joined)
 
  ##### Make key your index ########
-df.set_index("Downloads", inplace=True)
+df.set_index("Downloads", inplace=True) #inplace = True will permanently change ur dataframe 
 df.plot()
 plt.pyplot.show()
 
@@ -46,8 +46,22 @@ print(c5[c5["Real Price"] > 90])
 
 c5.to_html('great_snp.html')
 
+############# CLEANING DATA #########################
+data = c5.dropna(axis='index', how='any', subset=['Real Dividend','PE10'])
+data= c5.replace('NA', np.nan)
+print(data.isna())
+data.fillna(0, inplace=True)
+print(data)
+    #any = drop the record index(row) if any value is missing
+    #all = delete the record if and only if all values are missing 
+    #axis = 'index' for rows 'coloumns' for columns
+    #subset = list of column(s) that are compulsary if the record has this missing column the record will be dropped entirely
+    # if there are two values then it will show atleast one which is filled and not delete the record. 
+print(data.dtypes)
 
-
+################################Conversion ##############################
+data['PE10'] = data['PE10'].astype(int)
+print(data['SP500'].mean())
 
 
 
