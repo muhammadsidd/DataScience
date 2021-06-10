@@ -22,5 +22,16 @@ COVID19_PARAMS = {
 
 class Virus():
     def __init__(self, params):
-        pass
+        #create plot
+        self.fig = plt.figure()
+        self.axes = self.fig.add_subplot(111, projection = "polar")
+        self.axes.grid(False)
+        self.axes.set_xticklabels([])
+        self.axes.set_yticklabels([])
+        self.axes.set_ylim(0,1)
+
+        #create annotations
+        self.day_text = self.axes.annotate( "Day 0", xy=[np.pi / 2,1], ha ="center", va="bottom")
+        
+
     
