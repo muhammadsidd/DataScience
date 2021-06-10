@@ -145,3 +145,15 @@ plt.hist(ages, bins=bins, edgecolor = 'black' ) #can add log = True in parameter
 plt.axvline(med, label = "median line", color = 'red', linewidth = 2)
 plt.legend()
 plt.show()
+
+########################### SCATTER PLOT #############################################
+
+x= [1,2,3,4,5,6,7,8,9,10]
+y= [7,4,5,3,6,8,9,0,1,2]
+
+plt.scatter(x,y,s=100)
+plt.xlabel("seconds")
+plt.ylabel("hits")
+plt.grid(True)
+plt.tight_layout()
+plt.show()
