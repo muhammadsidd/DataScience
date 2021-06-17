@@ -3,5 +3,6 @@
         ".vscode/*.py",
         "**/site-packages/**/*.py",
         
-    ]
+    ],
+    "python.pythonPath": "C:\\Users\\Talha\\AppData\\Local\\Programs\\Python\\Python39\\python.exe"
 }
