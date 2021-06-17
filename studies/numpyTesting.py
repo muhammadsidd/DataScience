@@ -26,8 +26,8 @@ print(np.full((2,3), 99))
 print(np.random.rand(4,3)) 
 
 filedata = np.genfromtxt('data.txt', delimiter =',')
-filedata = filedata.astype('int32')
-
+# filedata = filedata.astype('int32')
+print (filedata)
 np.any(filedata > 50, axis=0) #axis 0 looks at coloumn . 1 looks at rows
 
 

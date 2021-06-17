@@ -20,3 +20,5 @@ print(df.describe())
 
 print(df.sum())
 print(df.max(axis=1))
+
+
