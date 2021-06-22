@@ -38,3 +38,12 @@ statuses = {
     "Bob": "offline",
     "Eve": "online",
 }
+
+from random import randint
+
+
+def random_number():
+    return randint(1, 101)
+
+
+print(random_number())
