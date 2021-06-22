@@ -47,3 +47,14 @@ def random_number():
 
 
 print(random_number())
+
+#isinstance(a,int) == true will not work becuz isinstace(True, int) will return True
+
+def only_ints(a, b):
+    if type(a) == int and type(b) == int:
+        return True
+    else:
+        return False
+
+
+print(only_ints(1, 'a'))
