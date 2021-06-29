@@ -76,3 +76,24 @@ def format_number(num):
 
 this = format_number(100000000)
 print (this)
+
+################### Sorting Dictionary ######################
+
+d = {"Oranges":5, "Apple":19, "James":10}
+
+sd = { k : v for k,v in sorted(d.items(), key = lambda v: v[1])} ##sorted by value
+sd = { k : v for k,v in sorted(d.items(), key= lambda v: v[0])} ## sorted by key
+print(sd)
+
+################## MAP and Filter ########################
+
+# l1 = ['argentina','pakistan','india','USA']
+# l2 = [12,24,23,14]
+
+# l1_l2 = map((lambda k,v: k[0], v[0]),(l1,l2))
+# print(list(l1_l2))
+
+def somefunction(keyFunction, values):
+    return dict((keyFunction(v),v) for v in values)
+
+print(somefunction(lambda a: a[0], ["Hello","World"]))
