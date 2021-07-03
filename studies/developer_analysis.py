@@ -19,4 +19,4 @@ print(df.loc[1, 'Country'])
 print(df['Country'].value_counts())
 
 schema_df.sort_index()
-print(schema_df.head())
+print(schema_df.head(10))
