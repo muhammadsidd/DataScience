@@ -25,7 +25,7 @@ print(df.tail(2)) #last 2
 joined = df.join(record1) #join the two using the same index. 
 print(joined)
 
- ##### Make key your index ########
+ ##### Make one key your index / primary key ########
 df.set_index("Downloads", inplace=True) #inplace = True will permanently change ur dataframe 
 df.plot()
 plt.pyplot.show()
@@ -59,10 +59,11 @@ print(data)
     # if there are two values then it will show atleast one which is filled and not delete the record. 
 print(data.dtypes)
 
-################################Conversion ##############################
+############################Conversion ##############################
 data['PE10'] = data['PE10'].astype(int)
 print(data['SP500'].mean())
 
+################### Groub by ########################
 
 
 
