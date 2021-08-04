@@ -35,6 +35,8 @@
 import concurrent.futures
 import time
 
+start = time. perf_counter()
+
 def do_something(seconds):
     print(f'sleeping {seconds} second..')
     time.sleep(seconds)
@@ -42,8 +44,10 @@ def do_something(seconds):
 
 with concurrent.futures.ThreadPoolExecutor() as executor:
     secs = [1,2,3,4,5]
-    result = [executor.submit(do_something,sec) for sec in secs]
+    results = [executor.submit(do_something,sec) for sec in secs]
 
-    for f in concurrent.futures.as_completed(result):
+    for f in concurrent.futures.as_completed(results):
         print(f.result())
 
+finish = time.perf_counter()
+print(f'Finished in {round(finish-start,2)} seconds(s)')
