@@ -1,6 +1,7 @@
 import concurrent.futures
 import time
 import numpy as np
+import requests
 
 start = time. perf_counter()
 
@@ -57,14 +58,24 @@ print(Z)
 
 ######## with while loop ######
 File1 = open("Example1.txt","r")
-file_stuff=File1.readline ()
-while file_stuff:
-    print(file_stuff)
-    file_stuff = File1.readline()
-File1.close()
+file_stuff=File1.readline (4)
+print(file_stuff)
+# while file_stuff:
+#     print(file_stuff)
+#     file_stuff = File1.readline()
+# File1.close()
 
 ###### for loop #############
 
 with open("Example1.txt","r") as File2:
     for line in File2.readlines():
         print(line)
+
+url = 'https://www.ibm.com'
+# r = requests.get(url)
+# print(r.status_code, r.request.headers, r.headers) #r.headers = response headers 
+payload = {"name": 'Joseph', "ID":223}
+r = requests.get(url, params=payload)
+print(r.url)
+
+print(2/2)
