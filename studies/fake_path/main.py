@@ -1,6 +1,6 @@
 import concurrent.futures
 import time
-
+import numpy as np
 
 start = time. perf_counter()
 
@@ -30,3 +30,41 @@ with concurrent.futures.ThreadPoolExecutor() as executor:
 finish = time.perf_counter()
 
 print(f'Finished in {round(finish-start,2)} seconds(s)')
+
+print(int(False))
+print("123".replace("12", "ab"))
+print({'a','b'} &{'a'})
+print(len(("disco",10,1.2, "hard rock",10)))
+
+for i,x in enumerate(['A','B','C']):
+    print(i,2*x)
+
+a=1
+
+def do(x):
+    return(x+a)
+
+print(do(1))
+
+X=np.array([[1,0,1],[2,2,2]]) 
+out=X[0,1:3]
+print(out)
+
+X=np.array([[1,0],[0,1]])
+Y=np.array([[2,1],[1,2]]) 
+Z=np.dot(X,Y)
+print(Z)
+
+######## with while loop ######
+File1 = open("Example1.txt","r")
+file_stuff=File1.readline ()
+while file_stuff:
+    print(file_stuff)
+    file_stuff = File1.readline()
+File1.close()
+
+###### for loop #############
+
+with open("Example1.txt","r") as File2:
+    for line in File2.readlines():
+        print(line)
