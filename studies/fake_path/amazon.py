@@ -35,7 +35,7 @@ def deliveryPlan(allLocations, numDeliveries):
         
 if __name__ == '__main__':
 
-    t = deliveryPlan([[1,-3],[1,2],[3,4],[0,1]],2)
+    t = deliveryPlan([[1,-3],[1,2],[3,4],[0,1],[0,2]],3)
     print(t)
 
     
