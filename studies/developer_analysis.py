@@ -53,7 +53,26 @@ df.columns = df.columns.str.replace(' ','_')
 # print(df.head())
 
 df.loc[2,['Country','LanguageWorkedWith']] = ['Russia', 'Python']
-print(df.loc[2,['Country','LanguageWorkedWith']])
+# print(df.loc[2,['Country','LanguageWorkedWith']])
 
 df.Country = df.Country.str.lower()## convert this column values in to lower case
-print(df.loc[2,['Country']]) 
+# print(df.loc[2,['Country']]) 
+
+### APPLY #####
+
+## you can pass in the entire column to any function, in other words you can apply every function to each record of the column 
+df['Country'] = df['Country'].astype(str) #convert data into into 
+print(df['Country'].apply(lambda x: x.lower())) #apply length function to it (upper function is just as example, it could be a custom function/ user defined / lambda)
+
+# for apply functions on individual elements of dataframe instead of series (column) of dataframe use applymap
+df.astype(str)
+df.applymap(lambda x : len)
+df['LanguageWorkedWith'] = df['LanguageWorkedWith'].replace({'Python': 'Python3'})
+
+print(df.loc[high_sal,['LanguageWorkedWith']])
+df.rename(columns={'ConvertedComp':'SalaryUSD'}, inplace=True)
+print(df.loc[high_sal,['SalaryUSD']])
+
+df['Hobbyist'] = df['Hobbyist'].map({"Yes":True, "No":False}) ## use replace instead of map if you DONOT wanna convert values like not sure or others to nan. 
+
+print(df.head())
