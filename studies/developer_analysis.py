@@ -44,9 +44,16 @@ schema_df.sort_index()
 
 # print([x.upper() for x in df.columns])
 
-df.columns = [x.upper() for x in df.columns]
+# df.columns = [x.upper() for x in df.columns]
 
 #will change spaces in column names to _ 
 df.columns = df.columns.str.replace(' ','_')
 
-print(df.head())
+# print(df.loc[2,'LanguageWorkedWith'])
+# print(df.head())
+
+df.loc[2,['Country','LanguageWorkedWith']] = ['Russia', 'Python']
+print(df.loc[2,['Country','LanguageWorkedWith']])
+
+df.Country = df.Country.str.lower()## convert this column values in to lower case
+print(df.loc[2,['Country']]) 
