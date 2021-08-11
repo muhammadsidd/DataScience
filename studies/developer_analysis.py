@@ -21,8 +21,18 @@ print("\nTHIS IS COUNTRY\n")
 ########## first record's location #####################
 print(df.loc[1, 'Country'])
 
-############## value counts gives the count of the columns by adding all the records
+############## value counts gives the count of the columns by adding all the records (rows) ###########
 print(df['Country'].value_counts())
+
+df2= df['Country'].value_counts()
+
+# df2.to_csv('pakistan.csv')
+
+print("RIP\n")
+
+print(df.loc[df['Country']=='Pakistan'].agg(['count']))
+
+print("RIP\n")
 countries = ['United States','Pakistan','United Kingdom','Canada']
 high_sal = ((df['ConvertedComp'] >= 70000) & (df['Country'].isin(countries)) & (df['LanguageWorkedWith'].str.contains('Python', na = False)))
 print(df.loc[high_sal,['Country', 'LanguageWorkedWith']])
