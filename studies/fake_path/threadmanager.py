@@ -24,7 +24,8 @@ nums = [3,9,2,10,6,5,7,4,1,11]
 treds = []
 
 for i in range(len(nums)-1):
-    thread = threading.Thread(target=comparator,args=(nums[i],nums[i+1]))
+    thread = threading.Thread(target=comparator,
+    args=(nums[i],nums[i+1]))
     treds.append(thread)
 
 for t in treds:
