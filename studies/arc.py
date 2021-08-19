@@ -1,22 +1,14 @@
+def pal(str, str2):
+    temp = str[::-1]
+    count = 0 
 
+    for i in range(len(str2)):
+        if temp[0] != str2[0]:
+            count +=1
+        
+    if temp == str2 or count <= 1:
+        return True 
+    else:
+        return False
 
-
-def fib (pos):
-    
-    n = 0
-    n1 =1
-
-    index = 0
-
-    if pos == 1 :
-        print(n)
-    
-    while index < pos:
-        print(n)
-        temp = n + n1
-        n = n1
-        n1 = temp
-
-        index = index + 1
-
-x = fib(7)
+print(pal('stats', 'foo'))
