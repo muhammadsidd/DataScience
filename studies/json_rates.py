@@ -10,12 +10,9 @@ data = res.json()
 
 rates={}
 
-
 for rate in data["rates"]:
     price = data["rates"][rate]
     rates[rate] = price
-
-
 
 # print(json.dumps(rates,indent=2))
 
