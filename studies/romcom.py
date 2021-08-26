@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 from pprint import pprint
 import random
-from bs4 import BeautifulSoup
+# from bs4 import BeautifulSoup
 from urllib.request import urlopen
 import unicodedata
 import re
