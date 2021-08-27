@@ -17,60 +17,56 @@ package_detail = {
 }
 count = 0
 
+def namer(name):
+    package_detail['name'].append(name)
+
+
 def install_30(package_json, name):
-    global package_detail
     package_detail['30d'].append(package_json["analytics"]["install_on_request"]["30d"][name])
 
 
 def install_90(package_json, name):
-    global package_detail
     package_detail['90d'].append(package_json["analytics"]["install_on_request"]["90d"][name])
 
 
 def install_365(package_json, name):
-    global package_detail
     package_detail['365d'].append(package_json["analytics"]["install_on_request"]["365d"][name])
 
 
 def workload(package_url):
-    global count
-    global package_detail
 
     r = requests.get(package_url)
 
     name = package_url.split('/')[5].split('.')[0]
     
-    # package_detail['name'].append(name)
+    package_detail['name'].append(name)
     
-    # package_json = r.json()
+    package_json = r.json()
     treds = []
-    # package_detail['30d'].append(package_json["analytics"]["install_on_request"]["30d"][name])
-    # package_detail['90d'].append(package_json["analytics"]["install_on_request"]["90d"][name])
-    # package_detail['365d'].append(package_json["analytics"]["install_on_request"]["365d"][name])
 
-    # thread1= threading.Thread(target=install_30, args = (package_json, name))
-    # thread2 = threading.Thread(target=install_90, args = (package_json, name))
-    # thread3 = threading.Thread(target=install_365, args = (package_json, name))
     
-    # treds.append(thread1)
-    # treds.append(thread2)
-    # treds.append(thread3)
-
-    # for t in treds:
-    #     t.start()
-
-    # for t in treds:
-    #     t.join()
-    count +=1
-    print(package_url, count)
+    thread0 =threading.Thread(target=namer, args = (name,))
+    thread1= threading.Thread(target=install_30, args = (package_json, name))
+    thread2 = threading.Thread(target=install_90, args = (package_json, name))
+    thread3 = threading.Thread(target=install_365, args = (package_json, name))
     
+    treds.append(thread0)
+    treds.append(thread1)
+    treds.append(thread2)
+    treds.append(thread3)
 
+    for t in treds:
+        t.start()
 
+    for t in treds:
+        t.join()
+    print(package_json)
+    return name
+    
 def printer(urls):
     print(urls)
 
 def main():
-
     url = "https://formulae.brew.sh/api/formula.json"
     response = requests.get(url)
     packages = response.json()
@@ -88,14 +84,14 @@ def main():
         package_url = f"https://formulae.brew.sh/api/formula/{package_name}.json"
         url_list.append(package_url)
 
-    with Pool(processes=6) as pool: # or whatever your hardware can support
-
-            # have your pool map the file names to dataframes
-            pool.map(workload, url_list)
-            
-
-
-
-
+    with Pool(processes=4) as pool: # or whatever your hardware can support
+        namelist = pool.map(workload, url_list)
+    
+    print(namelist)
+    
+    
+    
 if __name__ == '__main__':
     main()
+    print(package_detail)
+    
