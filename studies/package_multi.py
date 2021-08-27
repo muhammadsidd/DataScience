@@ -1,8 +1,9 @@
 import json
+import multiprocessing
 import requests
 import time
 import threading
-from multiprocessing import Pool
+from multiprocessing import Manager, Pool
 import pandas as pd
 
 
@@ -87,6 +88,29 @@ def main():
     with Pool(processes=4) as pool: # or whatever your hardware can support
         namelist = pool.map(workload, url_list)
     
+    manager= Manager()
+    dictionary = manager.dict()
+
+
+    workers = []
+    p1 = multiprocessing.Process(target=workload,args=(url_list[0:250],))
+    p2 = multiprocessing.Process(target=workload,args=(url_list[250:500],))
+    p3 = multiprocessing.Process(target=workload,args=(url_list[500:1000],))
+    p4 = multiprocessing.Process(target=workload,args=(url_list[1000:len(url_list)],))
+    
+    workers.append(p1)
+    workers.append(p2)
+    workers.append(p3)
+    workers.append(p4)
+
+    for worker in workers:
+        worker.start()
+    
+    for worker in workers:
+        worker.join()
+
+
+
     print(namelist)
     
     
