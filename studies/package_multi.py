@@ -5,6 +5,17 @@ import time
 import threading
 from multiprocessing import Manager, Pool
 import pandas as pd
+import pymysql
+import mysql.connector
+
+# db = mysql.connector.connect(
+#     host ="",
+#     user="",
+#     password = "",
+#     database=""
+# )
+
+# mycursor = db.cursor("CREATE DATABASE TESTDB")
 
 
 
