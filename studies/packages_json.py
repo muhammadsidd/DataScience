@@ -8,6 +8,9 @@ packages= response.json()
 formatted_json = json.dumps(packages, indent=2)
 # print(formatted_json)
 
+
+def workload(package):
+    pass
 package_detail = {
     'name':[],
     'description':[],
