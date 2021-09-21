@@ -18,7 +18,8 @@ record2 = {
 }
 
 df = pd.DataFrame(record2, index= ['a','b','c','d','e','f','g'])
-print(df.head(3)) ##only 3 rows
+print(len(df.index))
+print(df) ##only 3 rows
 print(df.tail(2)) #last 2
 ## mer = pd.merge(df,record1, on="Day") //will merge on the key. SHOULD HAVE SAME KEY for on = 
 

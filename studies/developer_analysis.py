@@ -1,5 +1,73 @@
+from os import replace
 import pandas as pd
+import numpy as np
 from collections import Counter
+from pandas.io.parsers import read_csv
+import sqlalchemy
+import pymysql
+import matplotlib as plt
+from matplotlib import style
+style.use("fivethirtyeight")
+
+
+record1 = pd.DataFrame({
+    "Day":[1,2,3,4,5,6,7],
+    "Seeders": [25,51,97,50,23,52,17],
+    "Click" : [22,115,14,51,13,42,51]
+}, index= ['a','b','c','d','e','f','g'])
+
+record2 = {
+    "Downloads":[1,2,3,4,5,6,7],
+    "Uploads": [1000,500,100,50,25,5,1],
+    "watched" : [25,15,10,5,3,2,1]
+}
+
+df = pd.DataFrame(record2, index= ['a','b','c','d','e','f','g'])
+print(df) ##only 3 rows
+print(df.tail(2)) #last 2
+## mer = pd.merge(df,record1, on="Day") //will merge on the key. SHOULD HAVE SAME KEY for on = 
+
+joined = df.join(record1) #join the two using the same index. 
+print(joined)
+
+ ##### Make one key your index / primary key ########
+df.set_index("Downloads", inplace=True) #inplace = True will permanently change ur dataframe 
+df.plot()
+
+##Change colomn headers ##
+df = df.rename(columns={"watched":"Users"})
+print(df)
+
+concate = pd.concat([df,record1]) #going to default to num index if same index for first dataset and second dataset
+print(concate)
+
+###DATA MUNGING#######
+
+country = pd.read_csv('C:\\Users\\Talha\\Downloads\\data_csv.csv')
+c5 = country.head(5)
+print(c5)
+print(c5[c5["Real Price"] > 90]) 
+
+c5.to_html('great_snp.html')
+
+############# CLEANING DATA #########################
+data = c5.dropna(axis='index', how='any', subset=['Real Dividend','PE10'])
+data= c5.replace('NA', np.nan)
+print(data.isna())
+data.fillna(0, inplace=True)
+print(data)
+    #any = drop the record index(row) if any value is missing
+    #all = delete the record if and only if all values are missing 
+    #axis = 'index' for rows 'coloumns' for columns
+    #subset = list of column(s) that are compulsary if the record has this missing column the record will be dropped entirely
+    # if there are two values then it will show atleast one which is filled and not delete the record. 
+print(data.dtypes)
+
+############################Conversion ##############################
+data['PE10'] = data['PE10'].astype(int)
+print(data['SP500'].mean())
+
+
 df = pd.read_csv('developerdata.csv', index_col='Respondent')
 print (df.shape)
 print (df.info())
@@ -134,7 +202,19 @@ print('\nPEOPLE WHO KNOW PYTHON IN USA \n\n\n\n\n')
 print(tempdf['SocialMedia'].value_counts())
 print(tempdf['LanguageWorkedWith'].str.contains('Python').sum())
 
-#or
+############################## READING/Writing DATA FROM SQL AND SAVING TO SQL ################
+
+engine = sqlalchemy.create_engine("mysql+pymysql://root:Mostwanted1996*@localhost:3306/demodb")
+sql_table = pd.read_sql_table("person",engine, columns=['name']) #remove column = name to print entire table 
+print(sql_table)
+query = "some query"
+pd.read_sql_query(query, engine) # can take argumnets for chunks read documentation
+## alternatively u can use pd.read_sql
+
+##### saving into sql table 
+
+df = pd.read_csv("some file") #need to have same column names as db table 
+df.to_sql(name = 'person',con = engine, index=False, if_exists= np.append ) #if_exists has other options, consider reading the documentation 
 
 
 
