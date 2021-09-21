@@ -19,6 +19,7 @@ print(df[df['Country'] == 'Pakistan'].count())
 print("\nTHIS IS COUNTRY\n")
 
 ########## first record's location #####################
+#loc looks at location by row. 
 print(df.loc[1, 'Country'])
 
 ############## value counts gives the count of the columns by adding all the records (rows) ###########
@@ -81,6 +82,8 @@ df['Hobbyist'] = df['Hobbyist'].map({"Yes":True, "No":False}) ## use replace ins
 print(df.head())
 
 ################################################################   GROUP BY  #################################################################################################
+## group by returns a groupby type which is iterable, the index of this is based on what the user has specified the groupby on in the following example we will groupby 'Country'
+
 print("\n\n\n\n\n HERE NOW")
 for cols in df.columns:
     print(cols)
@@ -96,19 +99,46 @@ print(df["Country"].value_counts())
 country_group = df.groupby(['Country'])
 print(type(country_group)) #groupby object
 print(country_group.get_group('united states')['SocialMedia'].value_counts()) #u can set normalize = True inside value counts for %
-# print(country_group['SocialMedia'].value_counts())
-#alternatively we can use filter for just one group like so 
+print(country_group['SocialMedia'].value_counts())
 
-filt = df['Country'] == 'united states'
-tempdf = df.loc[filt]
-print(tempdf['SocialMedia'].value_counts())
+#### Number of people who know python in each country by percentage -- QUIZ 
+
+#--- PREVIOUS APROACH -- #
+# language_group = df.groupby(['LanguageWorkedWith'])
+# print("QUIZZZZZ ANSWERRRRRR\n\n\n")
+# print(language_group.get_group('Python')['Country'].value_counts(normalize=True))
+
+#apply wil apply this lambda funtion to each cell, since each cell (now x in lambda) is a series we can apply the str.contains method which was forbidden on groupbyseries type
+knows_python = country_group['LanguageWorkedWith'].apply(lambda x: x.str.contains('Python').sum()) #number of people in each country who know python
+country_res = df['Country'].value_counts() #Total number of people within each country 
+python_df =   pd.concat([country_res,knows_python], axis ='columns', sort=False)    #using concat to merge the two series together fo further calculations 
+print("\n\n\n PYTHON DF % \n\n\n")
+python_df.rename(columns={'Country':'NumResp','LanguageWorkedWith':'NumKnowsPython'},inplace=True)
+python_df['PCTknowsPython'] =  (python_df['NumKnowsPython']/python_df['NumResp']) * 100
+#sort by highest %knows python first, df will be sorted in descending order. 
+python_df.sort_values(by='PCTknowsPython',ascending=False, inplace=True)
+print(python_df)
+print(python_df.loc['japan'])
 
 print(country_group.get_group('united states')['SalaryUSD'].median())
-#or
 print(country_group['SalaryUSD'].median().loc['united states'])
-
 ##aggrigate function call takes arguments as a list type see example as follows 
 print(country_group['SalaryUSD'].agg(['median','mean']).loc['united states'])
+
+
+
+#alternatively we can use filter for just one group like so 
+filt = df['Country'] == 'united states'
+tempdf = df.loc[filt]
+print('\nPEOPLE WHO KNOW PYTHON IN USA \n\n\n\n\n')
+print(tempdf['SocialMedia'].value_counts())
+print(tempdf['LanguageWorkedWith'].str.contains('Python').sum())
+
+#or
+
+
+
+
 
 
 
