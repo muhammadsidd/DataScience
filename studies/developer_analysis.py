@@ -2,6 +2,7 @@ from os import replace
 import pandas as pd
 import numpy as np
 from collections import Counter
+from pandas.core.frame import DataFrame
 from pandas.io.parsers import read_csv
 import sqlalchemy
 import pymysql
@@ -21,6 +22,7 @@ record2 = {
     "Uploads": [1000,500,100,50,25,5,1],
     "watched" : [25,15,10,5,3,2,1]
 }
+
 
 df = pd.DataFrame(record2, index= ['a','b','c','d','e','f','g'])
 print(df) ##only 3 rows
@@ -76,7 +78,7 @@ schema_df = pd.read_csv('developerschema.csv', index_col='Column')
 
 pd.set_option('display.max_columns',85)
 pd.set_option('display.max_rows',85)
-
+print(df.columns.values)
 print(df.head(5))
 print(schema_df)
 
@@ -166,8 +168,8 @@ print(df["Country"].value_counts())
 
 country_group = df.groupby(['Country'])
 print(type(country_group)) #groupby object
-print(country_group.get_group('united states')['SocialMedia'].value_counts()) #u can set normalize = True inside value counts for %
-print(country_group['SocialMedia'].value_counts())
+print('\n\nProgrammers using SOCIAL MEDIA IN THE USA \n',country_group.get_group('united states')['SocialMedia'].value_counts()) #u can set normalize = True inside value counts for %
+print('\n\nSHOW ME NOWWWW \n',country_group['SocialMedia'].value_counts())
 
 #### Number of people who know python in each country by percentage -- QUIZ 
 
@@ -177,9 +179,14 @@ print(country_group['SocialMedia'].value_counts())
 # print(language_group.get_group('Python')['Country'].value_counts(normalize=True))
 
 #apply wil apply this lambda funtion to each cell, since each cell (now x in lambda) is a series we can apply the str.contains method which was forbidden on groupbyseries type
-knows_python = country_group['LanguageWorkedWith'].apply(lambda x: x.str.contains('Python').sum()) #number of people in each country who know python
-country_res = df['Country'].value_counts() #Total number of people within each country 
+knows_python = country_group['LanguageWorkedWith'].apply(lambda x: x.str.contains('Python').sum()) #number of people in each country who know python return type = series 
+country_res = df['Country'].value_counts() #Total number of people within each country in series 
 python_df =   pd.concat([country_res,knows_python], axis ='columns', sort=False)    #using concat to merge the two series together fo further calculations 
+
+print("\n\n\n Country RESpondants\n", type(country_res))
+print("\n\n\n Country know Python\n", type(knows_python))
+
+
 print("\n\n\n PYTHON DF % \n\n\n")
 python_df.rename(columns={'Country':'NumResp','LanguageWorkedWith':'NumKnowsPython'},inplace=True)
 python_df['PCTknowsPython'] =  (python_df['NumKnowsPython']/python_df['NumResp']) * 100
@@ -202,6 +209,8 @@ print('\nPEOPLE WHO KNOW PYTHON IN USA \n\n\n\n\n')
 print(tempdf['SocialMedia'].value_counts())
 print(tempdf['LanguageWorkedWith'].str.contains('Python').sum())
 
+print(df.columns.values)
+
 ############################## READING/Writing DATA FROM SQL AND SAVING TO SQL ################
 
 engine = sqlalchemy.create_engine("mysql+pymysql://root:Mostwanted1996*@localhost:3306/demodb")
@@ -216,7 +225,20 @@ pd.read_sql_query(query, engine) # can take argumnets for chunks read documentat
 df = pd.read_csv("some file") #need to have same column names as db table 
 df.to_sql(name = 'person',con = engine, index=False, if_exists= np.append ) #if_exists has other options, consider reading the documentation 
 
+################################# JOINS/MERGES ##########################################
 
+df = DataFrame({"city":['chicago','NYC','sanfrancisco'], "humidity":[55,54,56]})
+df2 =DataFrame({"city":['chicago','NYC','Tampa'], "temp":[85,84,96]})
+
+df3 = pd.merge(df,df2, on="city",how="outer", indicator=True)
+#### HOW #####
+#outer is union of the two dataframe 
+#inner is intersection that means only common cities in 2 fds 
+#left is gonna give u the whole of df1 and intersection
+#right is gonna give u the whole of df2 and intersection 
+#### INDICATOR = True #####
+#shows were data came from, left or right 
+print(df3)
 
 
 

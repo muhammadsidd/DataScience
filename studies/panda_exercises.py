@@ -65,8 +65,16 @@ data['PE10'] = data['PE10'].astype(int)
 print(data['SP500'].mean())
 
 ################### Groub by ########################
+print("THIS\n\n\n")
 
+df = pd.DataFrame({'A': [2,3,4,5,6], 'B': [3,6,7,8,9]}, index=[0,1,2,3,4])
+df['total'] = df.sum(axis=1)
+print(df)
+sum = df['A'].sum()
 
+print(sum)
+
+print(df)
 
 
 
