@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 from collections import Counter
 from pandas.core.frame import DataFrame
+from pandas.core.indexes.base import Index
 from pandas.io.parsers import read_csv
 import sqlalchemy
 import pymysql
@@ -242,5 +243,10 @@ print(df3)
 
 
 
+############################# in chunks ###################
+chunk_size =  5000
+batch_no = 1
 
-
+for chunk in pd.read_csv('movie_rating.csv',chunksize=chunk_size):
+    chunk.to_csv('movie_rating'+ str(batch_no)+ '.csv', index = False)
+    batch_no+=1
