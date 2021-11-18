@@ -46,36 +46,36 @@ print(concate)
 
 ###DATA MUNGING#######
 
-country = pd.read_csv('C:\\Users\\Talha\\Downloads\\data_csv.csv')
-c5 = country.head(5)
-print(c5)
-print(c5[c5["Real Price"] > 90]) 
+# country = pd.read_csv('C:\\Users\\Talha\\Downloads\\data_csv.csv')
+# c5 = country.head(5)
+# print(c5)
+# print(c5[c5["Real Price"] > 90]) 
 
-c5.to_html('great_snp.html')
+# c5.to_html('great_snp.html')
 
-############# CLEANING DATA #########################
-data = c5.dropna(axis='index', how='any', subset=['Real Dividend','PE10'])
-data= c5.replace('NA', np.nan)
-print(data.isna())
-data.fillna(0, inplace=True)
-print(data)
-    #any = drop the record index(row) if any value is missing
-    #all = delete the record if and only if all values are missing 
-    #axis = 'index' for rows 'coloumns' for columns
-    #subset = list of column(s) that are compulsary if the record has this missing column the record will be dropped entirely
-    # if there are two values then it will show atleast one which is filled and not delete the record. 
-print(data.dtypes)
+# ############# CLEANING DATA #########################
+# data = c5.dropna(axis='index', how='any', subset=['Real Dividend','PE10'])
+# data= c5.replace('NA', np.nan)
+# print(data.isna())
+# data.fillna(0, inplace=True)
+# print(data)
+#     #any = drop the record index(row) if any value is missing
+#     #all = delete the record if and only if all values are missing 
+#     #axis = 'index' for rows 'coloumns' for columns
+#     #subset = list of column(s) that are compulsary if the record has this missing column the record will be dropped entirely
+#     # if there are two values then it will show atleast one which is filled and not delete the record. 
+# print(data.dtypes)
 
-############################Conversion ##############################
-data['PE10'] = data['PE10'].astype(int)
-print(data['SP500'].mean())
+# ############################Conversion ##############################
+# data['PE10'] = data['PE10'].astype(int)
+# print(data['SP500'].mean())
 
 
-df = pd.read_csv('developerdata.csv', index_col='Respondent')
+df = pd.read_csv('C:\SummitWorks_training\DataScience\developerdata.csv', index_col='Respondent')
 print (df.shape)
 print (df.info())
 
-schema_df = pd.read_csv('developerschema.csv', index_col='Column')
+schema_df = pd.read_csv('C:\SummitWorks_training\DataScience\developerschema.csv', index_col='Column')
 
 pd.set_option('display.max_columns',85)
 pd.set_option('display.max_rows',85)
@@ -223,8 +223,8 @@ pd.read_sql_query(query, engine) # can take argumnets for chunks read documentat
 
 ##### saving into sql table 
 
-df = pd.read_csv("some file") #need to have same column names as db table 
-df.to_sql(name = 'person',con = engine, index=False, if_exists= np.append ) #if_exists has other options, consider reading the documentation 
+# df = pd.read_csv("some file") #need to have same column names as db table 
+# df.to_sql(name = 'person',con = engine, index=False, if_exists= np.append ) #if_exists has other options, consider reading the documentation 
 
 ################################# JOINS/MERGES ##########################################
 
@@ -244,9 +244,9 @@ print(df3)
 
 
 ############################# in chunks ###################
-chunk_size =  5000
-batch_no = 1
+# chunk_size =  5000
+# batch_no = 1
 
-for chunk in pd.read_csv('movie_rating.csv',chunksize=chunk_size):
-    chunk.to_csv('movie_rating'+ str(batch_no)+ '.csv', index = False)
-    batch_no+=1
+# for chunk in pd.read_csv('movie_rating.csv',chunksize=chunk_size):
+#     chunk.to_csv('movie_rating'+ str(batch_no)+ '.csv', index = False)
+#     batch_no+=1

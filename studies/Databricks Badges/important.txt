@@ -13,7 +13,7 @@ import csv
 engine = psycopg2.connect(
     database="postgres",
     user="postgres",
-    password="Mostwanted1996*",
+    password="0000",
     host="database-2.c96jpumhdub0.us-east-2.rds.amazonaws.com",
     port='5432'
 )
@@ -70,7 +70,7 @@ class DBConnection:
 
 class db:
     def __init__(self):
-        self.db = DBConnection(database="postgres", user="postgres", password="Mostwanted1996*",
+        self.db = DBConnection(database="postgres", user="postgres", password="0000",
                                host="database-2.c96jpumhdub0.us-east-2.rds.amazonaws.com", port='5432')
         self.con = self.db.conn()
         self.cursor = self.db.cur()
@@ -102,15 +102,6 @@ class db:
             l1.append(r)
 
         return l1[0][0] // numofthreads
-
-    def get_respondant(self):
-        query = 'SELECT "Respondent" FROM public."Developer" WHERE "index" = \'120\' '
-        self.cursor.execute(query)
-
-        for r in self.cursor:
-            print(r)
-
-
         
 
 df = pd.DataFrame
@@ -122,20 +113,18 @@ workspace.readfromtable(table_n)
 cols  = workspace.get_table_columns()
 chunk_size = workspace.get_chunksize(table_n,8)
 
-# print(cols)
-# print(chunk_size)
+print(cols)
+print(chunk_size)
 
 threads=[]
 
-# for chunk in pd.read_csv('temp.csv',chunksize=chunk_size):
+for chunk in pd.read_csv('temp.csv',chunksize=chunk_size):
 
-#     time.sleep(2)
+    time.sleep(2)
 
-#     thread = threading.Thread(target=workspace.insertintotable,args=(chunk,target_table))
-#     threads.append(thread)
-#     thread.start()
+    thread = threading.Thread(target=workspace.insertintotable,args=(chunk,target_table))
+    threads.append(thread)
+    thread.start()
 
-# for thread in threads:
-#     thread.join()
-
-workspace.get_respondant()
+for thread in threads:
+    thread.join()
