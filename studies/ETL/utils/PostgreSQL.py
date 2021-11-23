@@ -178,66 +178,7 @@ class PostgresDB:
         
         return status, resultset
     
-    def get_tbl_cols(self,query,values):
-        cur = None
-        status = -1
-        resultset = []
-        try:
-            cur = self.getcursor()
-            if True:
-                cur.arraysize = 1
-                cur.execute(query,values)
-                col_names = []
-                for i in range(0,len(cur.description)):
-                    col_names.append(cur.description[i][0])
-                    resultset = col_names
-                    status = 0
-        except psycopg2.DatabaseError as e:
-            self.logger.error("check_connection" +  str(e))
-            status = 1
-            resultset = e
-            cur.close()
-            return status,resultset
-        
-        except Exception as e:
-            self.logger.error("delete_data" +  str(e))
-            resultset = e
-        
-        return status, resultset
     
-    def get_tbl_clm_dtypes(self,query,values):
-        cur = None
-        status = -1
-        resultset = []
-        try:
-            cur = self.getcursor()
-            if True:
-                cur.arraysize = 1
-                cur.execute(query,values)
-                col_name_dtypes = []
-                for row in [row[1] for row in cur.description]:
-                    row = str(row)
-                    row = row.replace('class','')
-                    row = row.replace('psycopg2','')
-                    row = row.replace('DbType DB_TYPE_','')
-                    row = row.replace('<','')
-                    row = row.replace('>','')
-                    row = row.replace("'",'')
-                    col_name_dtypes.append(row)
-                    resultset = col_name_dtypes
-                    status = 0
-        except psycopg2.DatabaseError as e:
-            self.logger.error("clm_tbl_dtp" +  str(e))
-            status = 1
-            resultset = e
-            cur.close()
-            return status,resultset
-        
-        except Exception as e:
-            self.logger.error("clm_tbl_dataype" +  str(e))
-            resultset = e
-        
-        return status, resultset
     
     def get_audit_log_key(self,audit_log_func_name,job_cd):
         cur =  None
