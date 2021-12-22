@@ -54,6 +54,7 @@ x_train = np.reshape(x_train, (x_train.shape[0], x_train.shape[1], 1))
 ################### CREATE NEURAL NETWORK ############################
 # if problem occurs pip insall numpy==1.19.5
 
+#STEP 1 define the model 
 model = Sequential()
 
 model.add(LSTM(units=50, return_sequences=True, input_shape = (x_train.shape[1],1)))
@@ -64,6 +65,7 @@ model.add(LSTM(units=50))
 model.add(Dropout(0.2))
 model.add(Dense(units=1))
 
+#STEP 2 Compile the model
 model.compile(optimizer='adam',loss = 'mean_squared_error')
 model.fit(x_train,y_train, epochs = 25, batch_size=32)
 
