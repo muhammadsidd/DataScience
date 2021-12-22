@@ -36,7 +36,7 @@ scaled_data = scaler.fit_transform(data['Close'].values.reshape(-1, 1))
 # STEP 3
 # set prediction length
 prediction_days = 360
-future_day = 30
+future_day = 30 # predict next 30 days 
 #historic, predictive
 x_train, y_train = [], []
 # populate the dataset with respective value
