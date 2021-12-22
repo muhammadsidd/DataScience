@@ -57,16 +57,17 @@ x_train = np.reshape(x_train, (x_train.shape[0], x_train.shape[1], 1))
 #STEP 1 define the model 
 model = Sequential()
 
-model.add(LSTM(units=50, return_sequences=True, input_shape = (x_train.shape[1],1)))
-model.add(Dropout(0.2))
-model.add(LSTM(units=50,return_sequences=True))
+model.add(LSTM(units=50, return_sequences=True, input_shape = (x_train.shape[1],1)))#hidden layer 1
+model.add(Dropout(0.2)) 
+model.add(LSTM(units=50,return_sequences=True))#hidden layer 2
 model.add(Dropout(0.2)) #Dropout prevents overfitting of the model
-model.add(LSTM(units=50))
+model.add(LSTM(units=50)) #hidden layer 3
 model.add(Dropout(0.2))
-model.add(Dense(units=1))
+model.add(Dense(units=1)) #Output layer
 
 #STEP 2 Compile the model
-model.compile(optimizer='adam',loss = 'mean_squared_error')
+model.compile(optimizer='adam',loss = 'mean_squared_error') #Loss - measures the model error between dependent and independent variable when learning
+                                                            #Adam - how much shoud the model improve
 model.fit(x_train,y_train, epochs = 25, batch_size=32)
 
 ##################### TESTING THE MODEL ##############################
