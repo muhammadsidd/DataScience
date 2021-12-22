@@ -68,9 +68,11 @@ model.add(Dense(units=1)) #Output layer
 #STEP 2 Compile the model
 model.compile(optimizer='adam',loss = 'mean_squared_error') #Loss - measures the model error between dependent and independent variable when learning
                                                             #Adam - how much shoud the model improve
+
+#STEP 2 Fit the model in laps of epochs (how many times the same data is re-evaluated)
 model.fit(x_train,y_train, epochs = 25, batch_size=32)
 
-##################### TESTING THE MODEL ##############################
+##################### EVALUATE THE MODEL ##############################
 
 test_start =  dt.datetime(2020,1,1)
 test_end =  dt.datetime.now()
@@ -94,7 +96,7 @@ for x in range(prediction_days, len(model_inputs)):
 x_test = np.array(x_test)
 x_test =  np.reshape(x_test, (x_test.shape[0], x_test.shape[1],1))
 
-prediction_prices = model.predict(x_test)
+prediction_prices = model.predict(x_test) #EVALUATE
 prediction_prices = scaler.inverse_transform(prediction_prices)
 
 plt.plot(actual_price, color = 'black', label = 'Actual Prices')
