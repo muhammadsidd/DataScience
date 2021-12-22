@@ -103,7 +103,7 @@ plt.legend(loc = 'upper left')
 plt.show()
 
 
-########## PREDICT NEXT DAY ######################
+#################### PREDICTITION FOR NEXT 30 DAYS ######################
 
 real_data = [model_inputs[len(model_inputs) + 1 - prediction_days:len(model_inputs) + 1, 0]]
 real_data = np.array(real_data)
