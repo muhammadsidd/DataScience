@@ -74,7 +74,7 @@ registration_id = "3419578"
 #
 # **In this step you will need to:**
 # 1. Use the variable **`batch_2017_path`**, and **`dbutils.fs.head`** to investigate the 2017 batch file, if needed.
-# 2. Configure a **`DataFrameReader`** to ingest the text file identified by **`batch_2017_path`** - this should provide one record per line, with a single column named **`value`**
+# 2. Configure a **`df`** to ingest the text file identified by **`batch_2017_path`** - this should provide one record per line, with a single column named **`value`**
 # 3. Using the information in **`fixed_width_column_defs`** (or the dictionary itself) use the **`value`** column to extract each new column of the appropriate length.<br/>
 #   * The dictionary's key is the column name
 #   * The first element in the dictionary's value is the starting position of that column's data
@@ -97,7 +97,7 @@ registration_id = "3419578"
 #   each column but, it is also perfectly OK to hard code this step and extract one column at a time.
 # * The **`SparkSession`** is already provided to you as an instance of **`spark`**.
 # * The classes/methods that you will need for this exercise include:
-#   * **`pyspark.sql.DataFrameReader`** to ingest data
+#   * **`pyspark.sql.df`** to ingest data
 #   * **`pyspark.sql.DataFrameWriter`** to ingest data
 #   * **`pyspark.sql.Column`** to transform data
 #   * Various functions from the **`pyspark.sql.functions`** module
@@ -186,28 +186,28 @@ from  pyspark.sql.functions import input_file_name
 
 conf = SparkConf().setAppName("Read File")
 spark = SparkContext.getOrCreate(conf=conf)
-DataFrameReader = spark.read.option("header",True).text(batch_2017_path)
-DataFrameReader.show()
-DataFrameReader = DataFrameReader.select("value",*[F.substring("value",*v).alias(k) for k,v in fixed_width_column_defs.items()])
+df = spark.read.option("header",True).text(batch_2017_path)
+df.show()
+df = df.select("value",*[F.substring("value",*v).alias(k) for k,v in fixed_width_column_defs.items()])
 
-DataFrameReader.show()
+df.show()
 
-DataFrameReader= DataFrameReader.drop("value")
-DataFrameReader.show()
+df= df.drop("value")
+df.show()
 
-for colname in DataFrameReader.columns:
-    DataFrameReader = DataFrameReader.withColumn(colname,F.ltrim(colname))
-DataFrameReader.show()
+for colname in df.columns:
+    df = df.withColumn(colname,F.ltrim(colname))
+df.show()
 
 
-DataFrameReader=DataFrameReader.select([when(col(c)=="",None).otherwise(col(c)).alias(c) for c in DataFrameReader.columns])
-DataFrameReader.show()
+df=df.select([when(col(c)=="",None).otherwise(col(c)).alias(c) for c in df.columns])
+df.show()
 
-DataFrameReader= DataFrameReader.withColumn("ingest_file_name", input_file_name())
-DataFrameReader.show()
-df = DataFrameReader.withColumn("ingested_at", input_file_name())
+df= df.withColumn("ingest_file_name", input_file_name())
+df.show()
+df = df.withColumn("ingested_at", input_file_name())
 
-df = DataFrameReader.withColumn("ingested_at", F.current_timestamp())
+df = df.withColumn("ingested_at", F.current_timestamp())
 df.show()
 
 df.write.format("delta").mode("overwrite").save(batch_target_path)
@@ -227,7 +227,7 @@ reality_check_02_a()
 #
 # **In this step you will need to:**
 # 1. Use the variable **`batch_2018_path`**, and **`dbutils.fs.head`** to investigate the 2018 batch file, if needed.
-# 2. Configure a **`DataFrameReader`** to ingest the tab-separated file identified by **`batch_2018_path`**
+# 2. Configure a **`df`** to ingest the tab-separated file identified by **`batch_2018_path`**
 # 3. Add a new column, **`ingest_file_name`**, which is the name of the file from which the data was read from - note this should not be hard coded.
 # 4. Add a new column, **`ingested_at`**, which is a timestamp of when the data was ingested as a DataFrame - note this should not be hard coded.
 # 5. **Append** the corresponding **`DataFrame`** to the previously created datasets specified by **`batch_target_path`**
@@ -258,7 +258,7 @@ df.write.format("delta").mode("append").save(batch_target_path)
 #
 # **In this step you will need to:**
 # 1. Use the variable **`batch_2019_path`**, and **`dbutils.fs.head`** to investigate the 2019 batch file, if needed.
-# 2. Configure a **`DataFrameReader`** to ingest the comma-separated file identified by **`batch_2019_path`**
+# 2. Configure a **`df`** to ingest the comma-separated file identified by **`batch_2019_path`**
 # 3. Add a new column, **`ingest_file_name`**, which is the name of the file from which the data was read from - note this should not be hard coded.
 # 4. Add a new column, **`ingested_at`**, which is a timestamp of when the data was ingested as a DataFrame - note this should not be hard coded.
 # 5. **Append** the corresponding **`DataFrame`** to the previously created dataset specified by **`batch_target_path`**<br/>
