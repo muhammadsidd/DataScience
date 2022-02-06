@@ -65,8 +65,8 @@ registration_id = "3419578"
 
 # COMMAND ----------
 
-files = dbutils.fs.ls(f"{working_dir}/raw/orders/batch") # List all the files
-display(files)                                           # Display the list of files
+# files = dbutils.fs.ls(f"{working_dir}/raw/orders/batch") # List all the files
+# display(files)                                           # Display the list of files
 
 # COMMAND ----------
 
