@@ -47,9 +47,9 @@ df_agg =  df_join.groupBy(["ProductID", "Name","Color","Weoght"]).sum("LineTotal
 ############################# STEP 3 LOAD DATA INTO AZURE DATA LAKE STORAGE (FOR DATABEICKS) ##########################
 
 #Create a mountPoint for ADLS integration 
-dbutils.fs.mount(source = "", 
-                mount_point = "",
-                extra_configs = "" )
+dbutils.fs.mount(source = "azure datalake storage", 
+                mount_point = "mount_point_directory",
+                extra_configs = "access key and other variables in json format" )
 
 #List the files under the mount point 
 dbutils.fs.ls("mount_pointdirectory")
