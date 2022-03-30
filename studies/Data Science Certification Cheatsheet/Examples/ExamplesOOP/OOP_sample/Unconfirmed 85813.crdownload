@@ -1,0 +1,27 @@
+class Employee:
+    count=0  # number of employees in the company 
+    empList=[] # a list of employees with names
+    def __init__(self,name,empid):
+        self.name=name
+        self.empid=empid
+        Employee.count+=1
+        Employee.empList.append(self.name)
+    def getDepartment(self,empid):
+        print("there are {} employees".format(Employee.count))
+        print("{} belongs to {} Department".format(self.empid, "Trainer"))
+    @staticmethod
+    def getEmployeeList(n):
+        #print(self.name)
+        print("there are {} employees".format(Employee.count))
+        if(n<=len(Employee.empList) or n<0):
+            for emp in Employee.empList:
+                print("{}".format(emp))
+        else:
+            print("out of index")
+
+mar=Employee("Maruthi",1234)
+mar.getDepartment(1358) 
+mar1=Employee("Rajani",8966)
+mar2=Employee("Shan",45666)
+Employee.getEmployeeList(20)     
+mar2.getDepartment(8966)

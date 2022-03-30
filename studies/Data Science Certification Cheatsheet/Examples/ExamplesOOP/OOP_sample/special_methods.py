@@ -1,0 +1,32 @@
+"""
+Created on Jun 22, 2017
+
+@author: SummitWorks
+"""
+class Book():
+    def __init__(self, title, author, pages):
+        print("A book is created")
+        self.title = title
+        self.author = author
+        self.pages = pages
+
+    def __str__(self):
+        return "Title:%s , author:%s, pages:%s " % \
+              (self.title, self.author, self.pages)
+
+    def __len__(self):
+        return self.pages
+
+    def __del__(self):
+        print("A book is destroyed")
+
+
+book = Book("Inside Steve's Brain", "Leander Kahney", 304)
+# print(len(book))
+# del book
+
+
+book2 = Book("Inside Steve's Brain2", "Leander Kahney2", 305)
+print(book2)
+
+print(book)
