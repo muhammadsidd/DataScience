@@ -17,7 +17,7 @@ import logging
 engine = psycopg2.connect(
     database="postgres",
     user="postgres",
-    password="Mostwanted1996*",
+    password="",
     host="database-2.c96jpumhdub0.us-east-2.rds.amazonaws.com",
     port='5432'
 )
