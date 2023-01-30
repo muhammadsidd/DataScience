@@ -114,7 +114,7 @@ class DBConnection:
 class db:
     def __init__(self):
         try:
-            self.db = DBConnection(database="postgres", user="postgres", password="Mostwanted1996*",
+            self.db = DBConnection(database="postgres", user="postgres", password="",
                                 host="database-2.c96jpumhdub0.us-east-2.rds.amazonaws.com", port='5432')
             self.con = self.db.conn()
             self.cursor = self.db.cur()
