@@ -13,11 +13,11 @@ stop_words = stopwords.words('english')
 custom_stopwords = ['rt' , '$amc']
 
 ################# TWITTER API CREDENTIALS ####################
-consumer_key = "4DVrXQvvC9yYq2NLhcq3Shtok"
-consumer_secret = "z6RClz2iPvkeBUwD40lYunQ58JdNaqfSktvHrRiUpxzHBW54BS"
-bearer_Token = "AAAAAAAAAAAAAAAAAAAAAHZYKwEAAAAAIozYdhFG%2BS6XEkJResnAVOvIOy4%3DTxvqihYnIxGK2Wg7UYYB4G2EIup6NE2o9WtQ2keO1uudndQSeF"
-access_token = "1340798338497703937-R9Z0ShNFrP3SRL6uRoFaHCFGPpOwiP"
-access_token_secret = "Msf1DPRa2j3x08IA5ovBUxCWTeXuhejpuhvUvvrDxcNHs"
+consumer_key = ""
+consumer_secret = "S"
+bearer_Token = ""
+access_token = ""
+access_token_secret = ""
 ##############################################################
 
 ################### AUTHENTICATION ##########################
