@@ -44,7 +44,7 @@ def collect():
     for tweet in reversed(tweets):
         tweetlist.append(tweet.text)
         userlist.append(tweet.user.screen_name)
-        ids.append(tweet.id
+        ids.append(tweet.id)
         print(str(tweet.id)+'--'+tweet.text)
         
         # writelastseen(FILE_NAME, tweet.id)
