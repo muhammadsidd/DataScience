@@ -7,10 +7,10 @@ import pandas as pd
 from textblob import Word, TextBlob
 import random
 
-consumer_key = 'b33dF8unL1nBpG3mcT0OD5zxr'
-consumer_secret = 'YzfrbLK0PuV0jr4mn0XTizA5s2pGoN1mhyzTOZ1aQjCCmKCWaf'
-key = '1340798338497703937-KBQHH5WYXuptBMWwkIEBJyw718QrqF'
-secret = 'neonTJU2jbjKsHx3VE00bMkZ4ERVTO4gOzrHEBE40S2q4'
+consumer_key = ''
+consumer_secret = ''
+key = ''
+secret = ''
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(key, secret)
 
