@@ -13,3 +13,5 @@ def solution(N):
         temp *= 10
 
     return temp
+
+print(solution(7000))
