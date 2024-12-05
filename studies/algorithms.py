@@ -4,6 +4,9 @@ class Node:
     def __init__(self, name):
         self.name = name
         self.connected = {}
+    def __repr__(self):
+        # cls = self.__class__.__name__
+        return self.name
 
 
 class Edge:
@@ -83,10 +86,12 @@ def dijkstra(nodes, start):
 
     #iterating over a list of nodes each with a value of infinity
     temporary_nodes = [node for node in nodes]
+    print(temporary_nodes)
 
     while len(temporary_nodes) > 0:
         #sets a dictionary of all the availabe nodes along with their weight to the current node
         node_paths = {node: path[node] for node in temporary_nodes}
+        print(node_paths)
         
         #get the key value of the minimum distance node from the upper list
         visit = min(node_paths, key= node_paths.get)
